@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        //La escena es donde colocas todos tus objetos, cámaras y luces.
+        var scene= new THREE.Scene();
+       //La cámara define el punto de vista desde el que se verá la escena.
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+     //El renderizador se encarga de dibujar la escena en el lienzo.
+        var renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+//Para crear un objeto, necesitas una geometría (forma) y un material (apariencia)
+var geometry = new THREE.BoxGeometry();
+var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+var cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+//Las luces iluminan la escena.
+var light = new THREE.PointLight(0xffffff, 1, 100);
+light.position.set(0, 0, 0);
+scene.add(light);
+//Three.js tiene soporte para animaciones usando requestAnimationFrame.
+function animate() {
+    requestAnimationFrame(animate);
+    cube.rotation.x += 0.01;
+    cube.rotation.y += 0.01;
+    renderer.render(scene, camera);
+}
+animate();
+
+
+    </script>
+</body>
+</html>
